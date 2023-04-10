@@ -1,21 +1,23 @@
-wait (4)
--- create kick part
+-- Wait for 4 seconds
+wait(4)
+
+-- Create the KickPart
 local brick = Instance.new("Part")
 brick.Name = "KickPart"
 brick.Size = Vector3.new(2000, 2000, 2000)
 brick.Anchored = true
 brick.CanCollide = false
-brick.Parent = game.Workspace
+brick.Parent = workspace
 
--- define onPartTouched function
+-- Define the onPartTouched function
 local function onPartTouched(otherPart)
-	local character = otherPart.Parent
-	local player = game.Players:GetPlayerFromCharacter(character)
-	if player then
-		player:Kick("lol")
-	end
+    local character = otherPart.Parent
+    local player = game.Players:GetPlayerFromCharacter(character)
+    if player then
+        player:Kick("lol")
+    end
 end
 
--- connect onPartTouched function to Touched event
-local kickPart = script.Parent.KickPart
+-- Connect the onPartTouched function to the Touched event
+local kickPart = workspace:WaitForChild("KickPart")
 kickPart.Touched:Connect(onPartTouched)
