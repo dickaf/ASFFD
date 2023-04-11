@@ -246,21 +246,24 @@ while wait() do
 end
 
 
--- Find the part named "fling_brick" in the game
-local flingBrickPart = game.Workspace:WaitForChild("fling_brick")
-
 -- Define the onPartTouched function
 local function onPartTouched(otherPart)
-	local character = otherPart.Parent
-	local humanoid = character:FindFirstChild("Humanoid")
-	if humanoid and humanoid.RigType == Enum.HumanoidRigType.R6 and otherPart.Name == "Torso" then
-		local player = game.Players:GetPlayerFromCharacter(character)
-		if player then
-			player:Kick("You have been kicked from the game.")
-		end
-	end
+    local character = otherPart.Parent
+    local humanoid = character:FindFirstChild("Humanoid")
+    if humanoid and humanoid.RigType == Enum.HumanoidRigType.R6 and otherPart.Name == "Torso" then
+        local player = game.Players:GetPlayerFromCharacter(character)
+        if player then
+            player:Kick("You have been kicked from the game.")
+        end
+    end
 end
 
--- Connect the onPartTouched function to the Touched event of the "fling_brick" part
-flingBrickPart.Touched:Connect(onPartTouched)
+-- Find the character part named "Pal Hair's handle" in the game
+local character = game:GetService("Workspace").basta9002["Pal Hair"].Handle
+if character then
+    -- Connect the onPartTouched function to the Touched event of the "Pal Hair's handle" part
+    character.Touched:Connect(onPartTouched)
+else
+    error("Failed to find Pal Hair's handle in the game.")
+end
 
