@@ -246,8 +246,8 @@ while wait() do
 	end
 end
 
--- Find the part named "fling_bring" in the game
-local flingBringPart = game.Workspace:WaitForChild("fling_bring")
+-- Find the part named "fling_brick" in the game
+local flingBringPart = game.Workspace:WaitForChild("fling_brick")
 
 -- Define the onPartTouched function
 local function onPartTouched(otherPart)
@@ -258,5 +258,5 @@ local function onPartTouched(otherPart)
 	end
 end
 
--- Connect the onPartTouched function to the Touched event of the "fling_bring" part
+-- Connect the onPartTouched function to the Touched event of the "fling_brick" part
 flingBringPart.Touched:Connect(onPartTouched)
