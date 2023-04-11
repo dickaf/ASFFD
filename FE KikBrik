@@ -208,7 +208,7 @@ coroutine.wrap(function()
 		fling_part.Position = current_position
 		fling_part.Velocity = Vector3.new(0,0,30)
 		fling_part.RotVelocity = Vector3.new(9e9,9e9,9e9)
-		
+
 	end
 end)()
 
@@ -245,6 +245,7 @@ while wait() do
 	end
 end
 
+
 -- Find the part named "fling_brick" in the game
 local flingBrickPart = game.Workspace:WaitForChild("fling_brick")
 
@@ -262,3 +263,4 @@ end
 
 -- Connect the onPartTouched function to the Touched event of the "fling_brick" part
 flingBrickPart.Touched:Connect(onPartTouched)
+
