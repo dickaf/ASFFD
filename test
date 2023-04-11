@@ -1,11 +1,8 @@
-local C = script.Parent
-local F = C.Values.AllowFight
-local N = 0
+-- Get the Workspace service
+local workspace = game:GetService("Workspace")
 
-while N < 10 do
-F.Value = true
-wait (1)
-N = N + 1
-end
+-- Access the basta9002.Values.AllowFight value
+local allowFight = workspace.basta9002.Values.AllowFight
 
-script:Destroy()
+-- Set the value of AllowFight to true
+allowFight.Value = true
