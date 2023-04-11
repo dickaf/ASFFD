@@ -209,27 +209,6 @@ coroutine.wrap(function()
 		fling_part.Velocity = Vector3.new(0,0,30)
 		fling_part.RotVelocity = Vector3.new(9e9,9e9,9e9)
 		
-		
-		-- Find the part named "fling_brick" in the game
-		local flingBrickPart = game.Workspace:WaitForChild("fling_brick")
-
-		-- Define the onPartTouched function
-		local function onPartTouched(otherPart)
-			local character = otherPart.Parent
-			local humanoid = character:FindFirstChild("Humanoid")
-			if humanoid and humanoid.RigType == Enum.HumanoidRigType.R6 and otherPart.Name == "Torso" then
-				local player = game.Players:GetPlayerFromCharacter(character)
-				if player then
-					player:Kick("You have been kicked from the game.")
-				end
-			end
-		end
-
-		-- Connect the onPartTouched function to the Touched event of the "fling_brick" part
-		flingBrickPart.Touched:Connect(onPartTouched)
-
-	
-
 	end
 end)()
 
@@ -266,3 +245,20 @@ while wait() do
 	end
 end
 
+-- Find the part named "fling_brick" in the game
+local flingBrickPart = game.Workspace:WaitForChild("fling_brick")
+
+-- Define the onPartTouched function
+local function onPartTouched(otherPart)
+	local character = otherPart.Parent
+	local humanoid = character:FindFirstChild("Humanoid")
+	if humanoid and humanoid.RigType == Enum.HumanoidRigType.R6 and otherPart.Name == "Torso" then
+		local player = game.Players:GetPlayerFromCharacter(character)
+		if player then
+			player:Kick("You have been kicked from the game.")
+		end
+	end
+end
+
+-- Connect the onPartTouched function to the Touched event of the "fling_brick" part
+flingBrickPart.Touched:Connect(onPartTouched)
