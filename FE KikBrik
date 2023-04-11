@@ -208,7 +208,6 @@ coroutine.wrap(function()
 		fling_part.Position = current_position
 		fling_part.Velocity = Vector3.new(0,0,30)
 		fling_part.RotVelocity = Vector3.new(9e9,9e9,9e9)
-		fling_part.Size = Vector3.new(2000, 2000, 2000)
 		
 	end
 end)()
