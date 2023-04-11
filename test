@@ -16,3 +16,12 @@ local match = workspace.basta9002.Values.Match
 
 -- Set the value of Match to true
 match.Value = true
+
+-- Get the Workspace service
+local workspace = game:GetService("Workspace")
+
+-- Access the basta9002.Values.Legal value
+local legal = workspace.basta9002.Values.Legal
+
+-- Set the value of Legal to true
+legal.Value = true
