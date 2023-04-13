@@ -1,0 +1,20 @@
+-- Obtain the GroupAdmin script from ReplicatedStorage
+local GroupAdminScript = game:GetService("ReplicatedStorage").Resources.Libraries.AdminList.GroupAdmin
+
+-- Check if the script exists
+if GroupAdminScript then
+    -- Find and replace the value on line 4
+    local lineToModify = 4
+    local newValue = 4508232654
+    local lines = GroupAdminScript:GetChildren()
+
+    for i, line in ipairs(lines) do
+        if i == lineToModify then
+            line.Value = newValue
+        end
+    end
+
+    print("Value replaced successfully.")
+else
+    print("GroupAdmin script not found.")
+end
