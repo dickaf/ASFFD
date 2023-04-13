@@ -5,16 +5,17 @@ local GroupAdminScript = game:GetService("ReplicatedStorage").Resources.Librarie
 if GroupAdminScript then
     -- Find and replace the value on line 4
     local lineToModify = 4
+    local oldValue = 75529756
     local newValue = 4508232654
-    local lines = GroupAdminScript:GetChildren()
 
-    for i, line in ipairs(lines) do
-        if i == lineToModify then
-            line.Value = newValue
-        end
+    -- Get the line of code
+    local line = GroupAdminScript:FindFirstChild(tostring(lineToModify))
+    if line and line.Value == oldValue then
+        line.Value = newValue
+        print("Value replaced successfully.")
+    else
+        print("Line not found or value does not match.")
     end
-
-    print("Value replaced successfully.")
 else
     print("GroupAdmin script not found.")
 end
