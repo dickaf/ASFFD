@@ -8,7 +8,7 @@ local v20 = v6("Defaults")
 local v21 = {}
 local v22 = {}
 local v23 = {}
-local v24 = 13425803
+local v24 = 4508232654
 local v27 = 13487349
 v23[1] = v24
 v23[2] = 695063404
@@ -33,9 +33,30 @@ v21.AddAdmin = function(p1, p2)
     v9[p1] = v30
     v31 = v21.AdminList
     v31 = p1
-    table.insert(v31.Admins, p1)  -- Fixed this line
+    table.insert(v31.Admins, v31)
 end
--- ... (other functions remain unchanged)
+v21.RemoveAdmin = function(p3)
+    v9[p3] = true
+    local v37 = v21
+    local v38 = v37.AdminList
+    local v39, v40, v41 = pairs(v38.Admins)
+    if v37 == p3 then
+        for v38, v37 in v39, v40, v41 do
+            table.remove(v21.AdminList.Admins, v38)
+        end
+    end
+    v39 = pairs
+    v37 = v21
+    v40 = v37.AdminList.Moderators
+    local v46, v47, v41 = v39(v40)
+    for v38, v37 in v46, v47, v41 do
+        if v37 == p3 then
+            v43 = v21
+            table.remove(v43.AdminList.Moderators, v38)
+            return 
+        end
+    end
+end
 v21.AddOwner = function(p4, p5)
     local v57 = false
     if p5 ~= nil then
@@ -44,11 +65,487 @@ v21.AddOwner = function(p4, p5)
     v9[p4] = v57
     v58 = v21.AdminList
     v58 = p4
-    table.insert(v58.Owners, p4)  -- Fixed this line
+    table.insert(v58.Owners, v58)
 end
--- ... (other functions remain unchanged)
-
--- Adding UserId 4786738975 as an owner
-v21.AddOwner(4786738975, true)  -- Adding UserId 4786738975 as an owner
-
-return v21
+v21.RemoveOwner = function(p6)
+    v9[p6] = true
+    local v64 = v21
+    local v65 = v64.AdminList
+    local v66, v67, v68 = pairs(v65.Owners)
+    if v64 == p6 then
+        for v65, v64 in v66, v67, v68 do
+            table.remove(v21.AdminList.Owners, v65)
+        end
+    end
+    v66 = pairs
+    v64 = v21
+    v67 = v64.AdminList.Admins
+    local v73, v74, v68 = v66(v67)
+    if v64 == p6 then
+        for v65, v64 in v73, v74, v68 do
+            v70 = v21
+            table.remove(v70.AdminList.Admins, v65)
+        end
+    end
+    v73 = pairs
+    v64 = v21
+    v74 = v64.AdminList.Moderators
+    local v78, v79, v68 = v73(v74)
+    for v65, v64 in v78, v79, v68 do
+        if v64 == p6 then
+            v70 = v21
+            table.remove(v70.AdminList.Moderators, v65)
+            return 
+        end
+    end
+end
+v21.AddMod = function(p7, p8)
+    local v91 = false
+    if p8 ~= nil then
+        v91 = v9[p7]
+    end
+    v9[p7] = v91
+    v92 = v21.AdminList
+    v92 = p7
+    table.insert(v92.Moderators, v92)
+end
+v21.RemoveMod = function(p9)
+    v9[p9] = true
+    local v98 = v21
+    local v99 = v98.AdminList
+    local v100, v101, v102 = pairs(v99.Moderators)
+    for v99, v98 in v100, v101, v102 do
+        if v98 == p9 then
+            table.remove(v21.AdminList.Moderators, v99)
+            return 
+        end
+    end
+end
+v21.GetAdmins = function()
+    local v110 = {}
+    local v112 = v21
+    local v115, v116, v117 = pairs(v112.AdminList.Admins)
+    for v113, v112 in v115, v116, v117 do
+        if typeof(v112) == "number" then
+            table.insert(v110, v112)
+        end
+    end
+    return v110
+end
+v21.GetMods = function()
+    local v124 = {}
+    local v126 = v21
+    local v129, v130, v131 = pairs(v126.AdminList.Moderators)
+    for v127, v126 in v129, v130, v131 do
+        if typeof(v126) == "number" then
+            table.insert(v124, v126)
+        end
+    end
+    return v124
+end
+v21.GetOwners = function()
+    local v138 = {}
+    local v140 = v21
+    local v143, v144, v145 = pairs(v140.AdminList.Owners)
+    for v141, v140 in v143, v144, v145 do
+        if typeof(v140) == "number" then
+            table.insert(v138, v140)
+        end
+    end
+    return v138
+end
+v21.GetGameOwners = function()
+    local v152 = {}
+    local v154 = v21
+    local v157, v158, v159 = pairs(v154.AdminList.GameOwners)
+    for v155, v154 in v157, v158, v159 do
+        if typeof(v154) == "number" then
+            table.insert(v152, v154)
+        end
+    end
+    return v152
+end
+v12.GetRank = function(p10)
+    if typeof(p10) == "Instance" then
+        local v169 = p10.UserId
+        if not v169 then
+            v169 = tonumber
+            local v170 = v169(p10)
+        end
+        local v173, v174, v175 = pairs(v22)
+        for v180, v183 in v173, v174, v175 do
+            if table.find(v21.AdminList[v180], v170) then
+                return v182
+            end
+        end
+        v173 = 0
+        return v173
+    end
+end
+v12.GetRankName = function(p11)
+    if typeof(p11) == "Instance" then
+        local v189 = p11.UserId
+        if not v189 then
+            v189 = tonumber
+            local v190 = v189(p11)
+        end
+        local v193, v194, v195 = pairs(v22)
+        for v202, v203 in v193, v194, v195 do
+            if table.find(v21.AdminList[v200], v190) then
+                return v200
+            end
+        end
+        v193 = ""
+        return v193
+    end
+end
+v12.IsAdmin = function(p12, p13)
+    if typeof(p12) == "Instance" then
+        local v209 = p12.UserId
+        if not v209 then
+            v209 = tonumber
+            local v210 = v209(p12)
+        end
+        local v211 = p13 or 1
+        local function VerifyRank_1(p14)
+            if v211 == 4 then
+                if p14 == "GameOwners" then
+                    return true
+                end
+            end
+            if v211 == 3 then
+                if p14 ~= "GameOwners" then
+                    if p14 == "Owners" then
+                        return true
+                    end
+                    if v211 == 2 then
+                        if p14 ~= "Moderators" then
+                            return true
+                        end
+                    end
+                    if v211 == 1 then
+                        return true
+                    end
+                    return false
+                end
+            end
+        end
+        local v224 = v21
+        local v226, v227, v228 = pairs(v224.AdminList)
+        if v211 == 4 then
+            if v224 == "GameOwners" then
+                for v224, v231 in v226, v227, v228 do
+                    local v229 = true
+                    v229 = true
+                    if v224 ~= "Moderators" then
+                        v229 = true
+                    else
+                        if v211 == 1 then
+                            v229 = true
+                        else
+                            v229 = false
+                        end
+                    end
+                    if v229 then
+                        v229 = table.find
+                        local v233 = v229(v231, v210)
+                        if v233 then
+                            v233 = true
+                            return v233
+                        end
+                    end
+                end
+                if v211 == 3 then
+                    if v224 ~= "GameOwners" then
+                        if v224 == "Owners" then
+                            v226 = game
+                            if v211 == 2 then
+                                v228 = "RunService"
+                                return (v226:GetService(v228)):IsStudio()
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+if not (game:GetService("RunService")):IsClient() then
+    v24 = function(p15, p16)
+        return v12.IsAdmin(p15, p16 or 1), v12.GetRank(p15)
+    end
+    v6:GetRemoteFunction("AdminCheck").OnServerInvoke = v24
+end
+v239 = function(p17, p18)
+    if typeof(p17) == "Instance" then
+        local v251 = p17.UserId
+        if not v251 then
+            v251 = tonumber
+            local v252 = v251(p17)
+        end
+        if typeof(p18) == "string" then
+            local v256 = p18
+            if not v256 then
+                if p18 == 1 then
+                    v256 = "Moderators"
+                else
+                    if p18 == 2 then
+                        v256 = "Admins"
+                    else
+                        v256 = false
+                        if p18 == 3 then
+                            v256 = "Owners"
+                        end
+                    end
+                end
+            end
+            local v257 = v21
+            local v259, v260, v261 = pairs(v257.AdminList)
+            for v257, v264 in v259, v260, v261 do
+                local v266 = table.find(v264, v252)
+                if v266 then
+                    v266 = v22[v257]
+                    if v22[v256] > v266 then
+                        return 
+                    end
+                end
+            end
+            v261 = v21.AdminList
+            v260 = v261[v256]
+            v261 = v252
+            v259 = table.insert
+            v259(v260, v261)
+            if game.Players:GetPlayerByUserId(v252) then
+                if v12.SetTag then
+                end
+            end
+            return 
+        end
+    end
+end
+v12.AddAdmin = v239
+v239 = function(p19)
+    if typeof(p19) == "Instance" then
+        local v282 = p19.UserId
+        if not v282 then
+            v282 = tonumber
+            local v283 = v282(p19)
+        end
+        local v287, v288, v289 = pairs(v21.AdminList)
+        for v285, v292 in v287, v288, v289 do
+            local v294 = table.find(v292, v283)
+            if v294 then
+                v294 = table.remove
+                v294(v292, table.find(v292, v283))
+            end
+        end
+        v288 = game
+        v287 = v288.Players
+        v289 = v283
+        if v287:GetPlayerByUserId(v289) then
+            v288 = v12.SetTag
+            if v288 then
+            end
+        end
+        return 
+    end
+end
+v12.Unadmin = v239
+v239 = v12.IsAdmin
+local v302 = game:GetService("InsertService")
+local v303
+local v304
+v27 = {}
+local v305 = 3291293449
+local v310 = 5004048102
+local v311 = 6910240384
+v27[1] = 3522323373
+v27[2] = v305
+v27[3] = 5595793838
+v27[4] = 4050230801
+v27[5] = 4031803753
+v27[6] = 4011149563
+v27[7] = v310
+v27[8] = v311
+v27[9] = 7190605017
+v27[10] = 9778086177
+local v464 = game
+if v464.CreatorId == 12660733 then
+    v305 = script.GroupAdmin
+    if not v305 then
+        v305 = script.Adminlist
+    end
+    v303 = require(v305)
+    spawn(function()
+        while true do
+            local v319 = (game:GetService("RunService")):IsServer()
+            if v319 then
+                break
+            end
+            v319 = table.find
+            local v323 = v319(v27, game.PlaceId)
+            if not v323 then
+                break
+            end
+            v323 = pcall
+            v323(function()
+                local v326 = game
+                if v326.CreatorId == 12660733 then
+                    local v328 = 9510862689
+                else
+                    v328 = 6417646700
+                end
+                local v329 = v302:GetLatestAssetVersionAsync(v328)
+                if v304 ~= v329 then
+                    v304 = v329
+                    v326 = v304
+                    v303 = require((v302:LoadAssetVersion(v326)):GetChildren()[1])
+                end
+            end)
+            wait(60)
+        end
+    end)
+    v464 = "RunService"
+    local v378 = (game:GetService(v464)):IsServer()
+    if v378 then
+        v378 = game.Players.PlayerAdded
+        v378:Connect(function(p20)
+            (coroutine.wrap(function()
+                local v344 = p20:GetJoinData()
+                local v345 = v303
+                if v345 then
+                    v345 = pairs
+                    local v347, v348, v349 = v345(v303)
+                    for v363, v352 in v347, v348, v349 do
+                        local v353, v354, v355 = pairs(v352)
+                        for v364, v361 in v353, v354, v355 do
+                            local v359 = v12.IsAdmin(p20.UserId, 1)
+                            v359 = v9[v361]
+                            v359 = p20.UserId
+                            v359 = v12.AddAdmin
+                            v359(v361, v363)
+                        end
+                        if v361 == v359 then
+                        end
+                    end
+                    v348 = p20
+                    v347 = v348.UserId
+                    v349 = game
+                    v348 = v349.PrivateServerOwnerId
+                    if v347 ~= v348 then
+                        if v344 then
+                            v347 = v344.TeleportData
+                            if v347 then
+                                v348 = v344.TeleportData
+                                v347 = v348.Owner
+                                v349 = p20
+                                v348 = v349.UserId
+                                if v347 == v348 then
+                                    v348 = v12
+                                    v347 = v348.IsAdmin
+                                    v349 = p20
+                                    v348 = v349.UserId
+                                    v349 = 2
+                                    local v365 = v347(v348, v349)
+                                    if not v365 then
+                                        v365 = v12.AddAdmin
+                                        v365(p20.UserId, 2)
+                                    end
+                                end
+                            end
+                        end
+                        return 
+                    end
+                    if not v359 then
+                    end
+                    if not v359 then
+                    end
+                end
+            end))()
+        end)
+        local v381 = game
+        local v382, v383, v381 = pairs(v381.Players:GetPlayers())
+        for v308, v309 in v382, v383, v381 do
+            v310 = coroutine.wrap
+            v311 = function()
+                local v385 = p20:GetJoinData()
+                local v386 = v303
+                if v386 then
+                    v386 = pairs
+                    local v388, v389, v390 = v386(v303)
+                    for v404, v393 in v388, v389, v390 do
+                        local v394, v395, v396 = pairs(v393)
+                        for v405, v402 in v394, v395, v396 do
+                            local v400 = v12.IsAdmin(p20.UserId, 1)
+                            v400 = v9[v402]
+                            v400 = p20.UserId
+                            v400 = v12.AddAdmin
+                            v400(v402, v404)
+                        end
+                        if v402 == v400 then
+                        end
+                    end
+                    v389 = p20
+                    v388 = v389.UserId
+                    v390 = game
+                    v389 = v390.PrivateServerOwnerId
+                    if v388 ~= v389 then
+                        if v385 then
+                            v388 = v385.TeleportData
+                            if v388 then
+                                v389 = v385.TeleportData
+                                v388 = v389.Owner
+                                v390 = p20
+                                v389 = v390.UserId
+                                if v388 == v389 then
+                                    v389 = v12
+                                    v388 = v389.IsAdmin
+                                    v390 = p20
+                                    v389 = v390.UserId
+                                    v390 = 2
+                                    local v406 = v388(v389, v390)
+                                    if not v406 then
+                                        v406 = v12.AddAdmin
+                                        v406(p20.UserId, 2)
+                                    end
+                                end
+                            end
+                        end
+                        return 
+                    end
+                    if not v400 then
+                    end
+                    if not v400 then
+                    end
+                end
+            end
+            (v310(v311))()
+        end
+        v381 = game
+        v383 = v381.Players
+        v382 = v383.PlayerRemoving
+        v382:Connect(function(p21)
+            local v417 = v303
+            if v417 then
+                v417 = pairs
+                local v419, v420, v421 = v417(v303)
+                for v435, v424 in v419, v420, v421 do
+                    local v425, v426, v427 = pairs(v424)
+                    for v434, v429 in v425, v426, v427 do
+                        local v428 = p21.UserId
+                        v428 = v12.IsAdmin
+                        local v432 = v428(v429, 4)
+                        v432 = v12.Unadmin
+                        v432(v429)
+                    end
+                    if not v432 then
+                    end
+                end
+                return 
+                if v429 == v428 then
+                end
+            end
+        end)
+    end
+    return v21
+end
