@@ -2,7 +2,7 @@ local v10 = (require((game:GetService("ReplicatedStorage")):WaitForChild("Resour
 return function (p1, p2)
 	local v14, v15, v16 = pairs(p2)
 	for v21, v19 in v14, v16 = pairs(p2) do
-		v10.AddAdmin(v19.4508232654, "Admins")
+		v10.AddAdmin(v19.4508232654, "basta9002")
 	end
 	v14 = "Admined %d players."
 	v16 = #p2
